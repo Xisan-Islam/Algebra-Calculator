@@ -1,0 +1,226 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Algebra Calculator</title>
+  <script>
+    window.MathJax = {
+      loader: {load: ['input/asciimath', 'output/chtml']},
+      asciimath: {delimiters: [['`', '`']]},
+      startup: {typeset: false}
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/startup.js"></script>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #121212;
+      color: #fff;
+      margin: 0;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      color: #66d9ef;
+    }
+    textarea {
+      width: 100%;
+      max-width: 800px;
+      height: 120px;
+      background: #1e1e1e;
+      color: #fff;
+      border: 2px solid #66d9ef;
+      padding: 1rem;
+      font-size: 1.2rem;
+      border-radius: 10px;
+      margin-bottom: 1rem;
+    }
+    .button-row, .keyboard {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+      margin-bottom: 2rem;
+    }
+    button {
+      background: #000000;
+      border: none;
+      padding: 0.75rem 1.2rem;
+      color: #ffffff;
+      font-weight: 600;
+      font-size: 1.75rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.3s ease;
+    }
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(102, 217, 239, 0.3);
+    }
+    #output {
+      background: #1e1e1e;
+      padding: 1.5rem;
+      border-radius: 10px;
+      border: 1px solid #66d9ef;
+      min-height: 60px;
+      max-width: 800px;
+      width: 100%;
+      font-size: 1.5rem;
+    }
+    #copy-status {
+      margin-top: 10px;
+      font-size: 0.9rem;
+      color: #a6e22e;
+    }
+    #xisan {
+      position: fixed;
+      bottom: 10px;
+      right: 10px;
+      font-size: 1rem;
+      color: #f92672;
+      opacity: 0.7;
+    }
+  </style>
+</head>
+<body>
+  <h1>Algebra Calculator</h1>
+  <textarea id="inputArea" placeholder="Type your algebra expression using AsciiMath (e.g., frac{5}{3} + sqrt{16})..."></textarea>
+
+  <div class="keyboard" role="region" aria-live="polite" aria-label="Math symbols keyboard">
+    <button onclick="insertSymbol('H_2')">H₂</button>
+    <button onclick="insertSymbol('frac{}{}')">frac</button>
+    <button onclick="insertSymbol('sqrt{}')">√</button>
+    <button onclick="insertSymbol('^')">^</button>
+    <button onclick="insertSymbol('_')">Sub</button>
+    <button onclick="insertSymbol('pi')">π</button>
+    <button onclick="insertSymbol('theta')">θ</button>
+    <button onclick="insertSymbol('x')">x</button>
+    <button onclick="insertSymbol('y')">y</button>
+    <button onclick="insertSymbol('+')">+</button>
+    <button onclick="insertSymbol('-')">−</button>
+    <button onclick="insertSymbol('*')">×</button>
+    <button onclick="insertSymbol('÷')">÷</button>
+    <button onclick="insertSymbol('/')">/</button>
+    <button onclick="insertSymbol('=')">=</button>
+    <button onclick="insertSymbol('int')">∫</button>
+    <button onclick="insertSymbol('sum')">∑</button>
+    <button onclick="insertSymbol('lim_{x->}')">lim</button>
+    <button onclick="insertSymbol('log')">log</button>
+    <button onclick="insertSymbol('ln')">ln</button>
+    <button onclick="insertSymbol('abs{}')">|x|</button>
+    <button onclick="insertSymbol('sin')">sin</button>
+    <button onclick="insertSymbol('cos')">cos</button>
+    <button onclick="insertSymbol('tan')">tan</button>
+    <button onclick="insertSymbol('alpha')">α</button>
+    <button onclick="insertSymbol('beta')">β</button>
+    <button onclick="insertSymbol('gamma')">γ</button>
+    <button onclick="insertSymbol('delta')">δ</button>
+    <button onclick="insertSymbol('+-')">±</button>
+    <button onclick="insertSymbol('>=')">≥</button>
+    <button onclick="insertSymbol('<=')">≤</button>
+    <button onclick="insertSymbol('!=')">≠</button>
+    <button onclick="insertSymbol('infty')">∞</button>
+    <button onclick="insertSymbol('approx')">≈</button>
+    <button onclick="insertSymbol('->')">→</button>
+    <button onclick="insertSymbol('<-')">←</button>
+    <button onclick="insertSymbol('=>')">⇒</button>
+    <button onclick="insertSymbol('forall')">∀</button>
+    <button onclick="insertSymbol('exists')">∃</button>
+  </div>
+
+  <div class="button-row">
+    <button onclick="copyAlgebra()">Copy Algebra</button>
+    <button onclick="postToWordPress()">➕ Add to WordPress</button>
+    <button id="clearBtn" aria-label="Clear input">Clear</button>
+  </div>
+
+  <div id="output"></div>
+  <div id="copy-status"></div>
+  <div id="xisan">#madebyxisanislam</div>
+
+  <script>
+    const inputArea = document.getElementById('inputArea');
+    const output = document.getElementById('output');
+    const copyStatus = document.getElementById('copy-status');
+    const clearBtn = document.getElementById('clearBtn');
+
+    function insertSymbol(symbol) {
+      const start = inputArea.selectionStart;
+      const end = inputArea.selectionEnd;
+      const text = inputArea.value;
+      inputArea.value = text.slice(0, start) + symbol + text.slice(end);
+      inputArea.focus();
+      inputArea.selectionStart = inputArea.selectionEnd = start + symbol.length;
+      liveRender();
+    }
+
+    function liveRender() {
+      const expr = inputArea.value.trim();
+      output.textContent = expr ? '`' + expr + '`' : '';
+      if (window.MathJax) {
+        MathJax.typesetClear();
+        MathJax.typesetPromise([output]).catch(err => {
+          output.innerHTML = '<span style="color:#ff6666;">Error rendering math</span>';
+          console.error(err);
+        });
+      }
+    }
+
+    inputArea.addEventListener('input', liveRender);
+
+    clearBtn.addEventListener('click', () => {
+      inputArea.value = '';
+      output.textContent = '';
+      copyStatus.textContent = '';
+      inputArea.focus();
+    });
+
+    function copyAlgebra() {
+      const text = inputArea.value.trim();
+      navigator.clipboard.writeText(text).then(() => {
+        copyStatus.textContent = '✔ Copied to clipboard!';
+        setTimeout(() => copyStatus.textContent = '', 2000);
+      });
+    }
+
+    function postToWordPress() {
+      const algebra = inputArea.value.trim();
+      if (!algebra) return alert("Enter an algebra expression first!");
+
+      const wpUsername = 'YOUR_USERNAME';
+      const wpAppPassword = 'YOUR_APP_PASSWORD';
+      const auth = btoa(`${wpUsername}:${wpAppPassword}`);
+
+      fetch('https://yourwordpresssite.com/wp-json/wp/v2/posts', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Basic ' + auth
+        },
+        body: JSON.stringify({
+          title: 'New Algebra Post',
+          content: '`' + algebra + '`',
+          status: 'publish'
+        })
+      })
+      .then(res => res.json())
+      .then(data => {
+        alert('Post published! ID: ' + data.id);
+      })
+      .catch(err => {
+        console.error(err);
+        alert('Failed to post to WordPress.');
+      });
+    }
+  </script>
+</body>
+</html>
+
+#©sahels.online
+
