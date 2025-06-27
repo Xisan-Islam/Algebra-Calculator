@@ -63,20 +63,22 @@
       transform: translateY(-2px);
       box-shadow: 0 6px 12px rgba(102, 217, 239, 0.3);
     }
-    #output {
+   #output {
   background: #1e1e1e;
   padding: 1.5rem;
   border-radius: 10px;
   border: 1px solid #66d9ef;
   min-height: 120px;
-  max-height: 300px; /* or any height you want */
+  max-height: 300px;
   max-width: 800px;
   width: 100%;
   font-size: 1.5rem;
-  overflow: auto; /* Enable scrolling if content is too large */
-  white-space: pre-wrap; /* Wrap long lines */
-  word-break: break-word;
+  overflow-y: auto; /* only vertical scroll */
+  overflow-x: hidden; /* disable horizontal scroll */
+  white-space: normal; /* allow wrapping */
+  word-break: break-word; /* break long words */
 }
+
 
     #copy-status {
       margin-top: 10px;
