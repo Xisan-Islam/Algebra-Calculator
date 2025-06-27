@@ -31,13 +31,13 @@
     }
     textarea {
       width: 100%;
-      max-width: 800px;
+      max-width: 50vw;
       height: 120px;
       background: #1e1e1e;
       color: #fff;
       border: 2px solid #66d9ef;
       padding: 1rem;
-      font-size: 1.2rem;
+      font-size: 1.5rem;
       border-radius: 10px;
       margin-bottom: 1rem;
     }
@@ -63,24 +63,20 @@
       transform: translateY(-2px);
       box-shadow: 0 6px 12px rgba(102, 217, 239, 0.3);
     }
+
    #output {
   background: #1e1e1e;
   padding: 1.5rem;
   border-radius: 10px;
   border: 1px solid #66d9ef;
-  min-height: 120px;
-  max-height: 300px;
-  max-width: 800px;
-  width: 100%;
+  height: 10vh;               /* fixed height to test scroll */
+  width: 90vw;                /* responsive width */
   font-size: 1.5rem;
-  overflow: auto; /* only vertical scroll */
-  /* overflow-x: hidden; disable horizontal scroll */
-  white-space: normal; /* allow wrapping */
-  word-break: break-word; /* break long words */
-  display: flex;
-  flex-wrap: wrap;
+  overflow-y: auto;           /* vertical scroll */
+  word-wrap: break-word;
+  white-space: normal;
+  display: block;             /* ensure it's not flex */
 }
-
 
     #copy-status {
       margin-top: 10px;
