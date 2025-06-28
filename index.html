@@ -91,6 +91,31 @@
       color: #f92672;
       opacity: 0.7;
     }
+
+    .button-row{
+      display: flex;
+      flex-direction: row;
+
+    }
+    .section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-right: 2rem;
+      padding-left: 2rem;
+      border-radius: 20px;
+      background-color: #1e1e1e;
+      margin-top: 0px;
+      margin-bottom: 0px;
+    }
+
+    .section h3 {
+      color: #66d9ef;
+      margin-bottom: 0.5rem;
+      font-size: 1.5rem;
+    }
+
+
   </style>
 </head>
 <body>
@@ -98,176 +123,183 @@
   <textarea id="inputArea" placeholder="Type your algebra expression using AsciiMath (e.g., frac{5}{3} + sqrt{16})..."></textarea>
 
   <div class="keyboard" role="region" aria-live="polite" aria-label="Math symbols keyboard">
-    <button onclick="insertSymbol('H_2')">H₂</button>
-    <button onclick="insertSymbol('frac{}{}')">frac</button>
-    <button onclick="insertSymbol('sqrt{}')">√</button>
-    <button onclick="insertSymbol('^')">^</button>
-    <button onclick="insertSymbol('_')">Sub</button>
-    <button onclick="insertSymbol('pi')">π</button>
-    <button onclick="insertSymbol('theta')">θ</button>
-    <button onclick="insertSymbol('x')">x</button>
-    <button onclick="insertSymbol('y')">y</button>
-    <button onclick="insertSymbol('+')">+</button>
-    <button onclick="insertSymbol('-')">−</button>
-    <button onclick="insertSymbol('*')">×</button>
-    <button onclick="insertSymbol('÷')">÷</button>
-    <button onclick="insertSymbol('/')">/</button>
-    <button onclick="insertSymbol('=')">=</button>
-    <button onclick="insertSymbol('int')">∫</button>
-    <button onclick="insertSymbol('sum')">∑</button>
-    <button onclick="insertSymbol('lim_{x->}')">lim</button>
-    <button onclick="insertSymbol('log')">log</button>
-    <button onclick="insertSymbol('ln')">ln</button>
-    <button onclick="insertSymbol('abs{}')">|x|</button>
-    <button onclick="insertSymbol('sin')">sin</button>
-    <button onclick="insertSymbol('cos')">cos</button>
-    <button onclick="insertSymbol('tan')">tan</button>
-    <button onclick="insertSymbol('alpha')">α</button>
-    <button onclick="insertSymbol('beta')">β</button>
-    <button onclick="insertSymbol('gamma')">γ</button>
-    <button onclick="insertSymbol('delta')">δ</button>
-    <button onclick="insertSymbol('+-')">±</button>
-    <button onclick="insertSymbol('>=')">≥</button>
-    <button onclick="insertSymbol('<=')">≤</button>
-    <button onclick="insertSymbol('!=')">≠</button>
-    <button onclick="insertSymbol('infty')">∞</button>
-    <button onclick="insertSymbol('approx')">≈</button>
-    <button onclick="insertSymbol('->')">→</button>
-    <button onclick="insertSymbol('<-')">←</button>
-    <button onclick="insertSymbol('=>')">⇒</button>
-    <button onclick="insertSymbol('forall')">∀</button>
-    <button onclick="insertSymbol('exists')">∃</button>
-    <button onclick="insertSymbol('vec{v}')">→v</button>
-    <button onclick="insertSymbol('hat{i}')">î</button>
-    <button onclick="insertSymbol('dot{a} + dot{b}')">a· + b·</button>
-    <button onclick="insertSymbol('vec{a} cdot vec{b}')">a · b</button>
-    <button onclick="insertSymbol('vec{a} times vec{b}')">a × b</button>
-    <button onclick="insertSymbol('[[a,b],[c,d]]')">2×2 Matrix</button>
-    <button onclick="insertSymbol('pmatrix{a & b \\\\ c & d}')">⎡a b⎤</button>
-    <button onclick="insertSymbol('det{[[a,b],[c,d]]}')">|Matrix|</button>
-    <button onclick="insertSymbol('bmatrix{1 & 2 \\\\ 3 & 4}')">[Matrix]</button>
-    <button onclick="insertSymbol('frac{dy}{dx}')">dy/dx</button>
-    <button onclick="insertSymbol('frac{partial f}{partial x}')">∂f/∂x</button>
-    <button onclick="insertSymbol('nabla vec{F}')">∇F</button>
-    <button onclick="insertSymbol('int_{a}^{b} f(x) dx')">∫ f(x) dx</button>
-    <button onclick="insertSymbol('int_{0}^{\\infty}')">∫₀^∞</button>
-    <button onclick="insertSymbol('mathbb{N}')">ℕ</button>
-    <button onclick="insertSymbol('mathbb{Z}')">ℤ</button>
-    <button onclick="insertSymbol('mathbb{Q}')">ℚ</button>
-    <button onclick="insertSymbol('mathbb{R}')">ℝ</button>
-    <button onclick="insertSymbol('mathbb{C}')">ℂ</button>
-    <button onclick="insertSymbol('emptyset')">∅</button>
-    <button onclick="insertSymbol('angle')">∠</button>
-    <button onclick="insertSymbol('triangle ABC')">△ABC</button>
-    <button onclick="insertSymbol('perp')">⊥</button>
-    <button onclick="insertSymbol('parallel')">∥</button>
-    <button onclick="insertSymbol('degree')">°</button>
-    <button onclick="insertSymbol('neg')">¬</button>
-    <button onclick="insertSymbol('land')">∧</button>
-    <button onclick="insertSymbol('lor')">∨</button>
-    <button onclick="insertSymbol('Rightarrow')">⇒</button>
-    <button onclick="insertSymbol('Leftrightarrow')">⇔</button>
-    <button onclick="insertSymbol('exists!')">∃!</button>
-    <button onclick="insertSymbol('nexists')">∄</button>
-    <button onclick="insertSymbol('cup')">∪</button>
-    <button onclick="insertSymbol('cap')">∩</button>
-    <button onclick="insertSymbol('subset')">⊂</button>
-    <button onclick="insertSymbol('supset')">⊃</button>
-    <button onclick="insertSymbol('subseteq')">⊆</button>
-    <button onclick="insertSymbol('supseteq')">⊇</button>
-    <button onclick="insertSymbol('lim_{x->0}')">limₓ→₀</button>
-<button onclick="insertSymbol('lim_{n->\\infty}')">limₙ→∞</button>
-<button onclick="insertSymbol('sum_{n=0}^{\\infty}')">∑ₙ₌₀^∞</button>
-<button onclick="insertSymbol('prod_{k=1}^{n}')">∏ₖ₌₁ⁿ</button>
-<button onclick="insertSymbol('bigcup_{i=1}^{n}')">⋃ᵢ₌₁ⁿ</button>
-<button onclick="insertSymbol('bigcap_{i=1}^{n}')">⋂ᵢ₌₁ⁿ</button>
-<button onclick="insertSymbol('iint')">∬</button>
-<button onclick="insertSymbol('iiint')">∭</button>
-<button onclick="insertSymbol('oint')">∮</button>
-<button onclick="insertSymbol('frac{d^2y}{dx^2}')">d²y/dx²</button>
-<button onclick="insertSymbol('frac{d^n y}{dx^n}')">dⁿy/dxⁿ</button>
-<button onclick="insertSymbol('frac{partial^2 u}{partial x^2}')">∂²u/∂x²</button>
-<button onclick="insertSymbol('binom{n}{k}')">C(n, k)</button>
-<button onclick="insertSymbol('P(n,k)')">P(n, k)</button>
-<button onclick="insertSymbol('cup')">∪</button>
-<button onclick="insertSymbol('cap')">∩</button>
-<button onclick="insertSymbol('subseteq')">⊆</button>
-<button onclick="insertSymbol('supseteq')">⊇</button>
-<button onclick="insertSymbol('setminus')">∖</button>
-<button onclick="insertSymbol('nabla')">∇</button>
-<button onclick="insertSymbol('partial')">∂</button>
-<button onclick="insertSymbol('infty')">∞</button>
-<button onclick="insertSymbol('cdot')">·</button>
-<button onclick="insertSymbol('circ')">∘</button>
-<button onclick="insertSymbol('iff')">↔</button>
-<button onclick="insertSymbol('implies')">⇒</button>
-<button onclick="insertSymbol('therefore')">∴</button>
-<button onclick="insertSymbol('because')">∵</button>
-<button onclick="insertSymbol('Delta')">Δ</button>
-<button onclick="insertSymbol('Sigma')">Σ</button>
-<button onclick="insertSymbol('Phi')">Φ</button>
-<button onclick="insertSymbol('Psi')">Ψ</button>
-<button onclick="insertSymbol('omega')">ω</button>
-    <button onclick="insertSymbol('alpha')">α</button>
-    <button onclick="insertSymbol('beta')">β</button>
-    <button onclick="insertSymbol('gamma')">γ</button>
-    <button onclick="insertSymbol('delta')">δ</button>
-    <button onclick="insertSymbol('epsilon')">ε</button>
-    <button onclick="insertSymbol('zeta')">ζ</button>
-    <button onclick="insertSymbol('eta')">η</button>
-    <button onclick="insertSymbol('iota')">ι</button>
-    <button onclick="insertSymbol('kappa')">κ</button>
-    <button onclick="insertSymbol('lambda')">λ</button>
-    <button onclick="insertSymbol('mu')">μ</button>
-    <button onclick="insertSymbol('nu')">ν</button>
-    <button onclick="insertSymbol('xi')">ξ</button>
-    <button onclick="insertSymbol('omicron')">ο</button>
-    <button onclick="insertSymbol('pi')">π</button>
-    <button onclick="insertSymbol('i')">i</button>
-<button onclick="insertSymbol('Re')">Re</button>
-<button onclick="insertSymbol('Im')">Im</button>
-<button onclick="insertSymbol('overline{z}')">conj(z)</button>
-<button onclick="insertSymbol('|z|')">|z|</button>
-<button onclick="insertSymbol('sinh')">sinh</button>
-<button onclick="insertSymbol('cosh')">cosh</button>
-<button onclick="insertSymbol('tanh')">tanh</button>
-<button onclick="insertSymbol('coth')">coth</button>
-<button onclick="insertSymbol('arcsin')">arcsin</button>
-<button onclick="insertSymbol('arccos')">arccos</button>
-<button onclick="insertSymbol('arctan')">arctan</button>
-<button onclick="insertSymbol('log_{b}{x}')">log_b(x)</button>
-<button onclick="insertSymbol('xor')">⊕</button>
-<button onclick="insertSymbol('nand')">NAND</button>
-<button onclick="insertSymbol('nor')">NOR</button>
-<button onclick="insertSymbol('oplus')">⊕</button>
-<button onclick="insertSymbol('odot')">⊙</button>
-<button onclick="insertSymbol('mod')">mod</button>
-<button onclick="insertSymbol('gcd')">gcd</button>
-<button onclick="insertSymbol('lcm')">lcm</button>
-<button onclick="insertSymbol('floor{x}')">⌊x⌋</button>
-<button onclick="insertSymbol('ceil{x}')">⌈x⌉</button>
-<button onclick="insertSymbol('angle ABC')">∠ABC</button>
-<button onclick="insertSymbol('overrightarrow{AB}')">→AB</button>
-<button onclick="insertSymbol('midpoint')">midpoint</button>
-<button onclick="insertSymbol('arc')">arc</button>
-<button onclick="insertSymbol('lim_{x to a^{-}}')">lim⁻</button>
-<button onclick="insertSymbol('lim_{x to a^{+}}')">lim⁺</button>
-<button onclick="insertSymbol('sum_{k=0}^{n} x^k')">Power Series</button>
-<button onclick="insertSymbol('e^{ix}')">Euler's e<sup>ix</sup></button>
-<button onclick="insertSymbol('tensor')">Tensors</button>
-<button onclick="insertSymbol('grad')">grad</button>
-<button onclick="insertSymbol('div')">div</button>
-<button onclick="insertSymbol('curl')">curl</button>
-<button onclick="insertSymbol('vdots')">⋮</button>
-<button onclick="insertSymbol('ddots')">⋱</button>
-<button onclick="insertSymbol('ldots')">…</button>
-<button onclick="insertSymbol('angle')">∠</button>
-<button onclick="insertSymbol('measuredangle')">∡</button>
-<button onclick="insertSymbol('triangle')">△</button>
+    <!-- Basic Math Operators -->
+     <div class="section">
+  <h3>Basic Operators</h3>
+<div class="button-row">
+  <button onclick="insertSymbol('+')">+</button>
+  <button onclick="insertSymbol('-')">−</button>
+  <button onclick="insertSymbol('*')">×</button>
+  <button onclick="insertSymbol('÷')">÷</button>
+  <button onclick="insertSymbol('/')">/</button>
+  <button onclick="insertSymbol('=')">=</button>
+  <button onclick="insertSymbol('!=')">≠</button>
+  <button onclick="insertSymbol('>')">></button>
+  <button onclick="insertSymbol('<')"><</button>
+  <button onclick="insertSymbol('>=')">≥</button>
+  <button onclick="insertSymbol('<=')">≤</button>
+  <button onclick="insertSymbol('approx')">≈</button>
+  <button onclick="insertSymbol('+-')">±</button>
+</div>
+</div>
 
+<!-- Algebraic Symbols -->
+     <div class="section">
+  <h3>Algebra</h3>
+<div class="button-row">
+  <button onclick="insertSymbol('x')">x</button>
+  <button onclick="insertSymbol('y')">y</button>
+  <button onclick="insertSymbol('i')">i</button>
+  <button onclick="insertSymbol('sqrt{}')">√</button>
+  <button onclick="insertSymbol('frac{}{}')">frac</button>
+  <button onclick="insertSymbol('^')">^</button>
+  <button onclick="insertSymbol('_')">Sub</button>
+  <button onclick="insertSymbol('abs{}')">|x|</button>
+  <button onclick="insertSymbol('floor{x}')">⌊x⌋</button>
+  <button onclick="insertSymbol('ceil{x}')">⌈x⌉</button>
+</div>
+</div>
+
+<!-- Calculus -->
+     <div class="section">
+  <h3>Calculus</h3>
+  <div class="button-row">
+  <button onclick="insertSymbol('lim_{x->}')">lim</button>
+  <button onclick="insertSymbol('int')">∫</button>
+  <button onclick="insertSymbol('int_{a}^{b} f(x) dx')">∫ f(x) dx</button>
+  <button onclick="insertSymbol('int_{0}^{\\infty}')">∫₀^∞</button>
+  <button onclick="insertSymbol('frac{dy}{dx}')">dy/dx</button>
+  <button onclick="insertSymbol('frac{d^2y}{dx^2}')">d²y/dx²</button>
+  <button onclick="insertSymbol('frac{d^n y}{dx^n}')">dⁿy/dxⁿ</button>
+  <button onclick="insertSymbol('frac{partial f}{partial x}')">∂f/∂x</button>
+  <button onclick="insertSymbol('frac{partial^2 u}{partial x^2}')">∂²u/∂x²</button>
+  <button onclick="insertSymbol('iint')">∬</button>
+  <button onclick="insertSymbol('iiint')">∭</button>
+  <button onclick="insertSymbol('oint')">∮</button>
+</div>
+</div>
+<!-- Trigonometry -->
+     <div class="section">
+  <h3>Trigonometry</h3>
+<div class="button-row">
+  <button onclick="insertSymbol('sin')">sin</button>
+  <button onclick="insertSymbol('cos')">cos</button>
+  <button onclick="insertSymbol('tan')">tan</button>
+  <button onclick="insertSymbol('sinh')">sinh</button>
+  <button onclick="insertSymbol('cosh')">cosh</button>
+  <button onclick="insertSymbol('tanh')">tanh</button>
+  <button onclick="insertSymbol('arcsin')">arcsin</button>
+  <button onclick="insertSymbol('arccos')">arccos</button>
+  <button onclick="insertSymbol('arctan')">arctan</button>
+</div>
+</div>
+<!-- Greek Letters -->
+     <div class="section">
+  <h3>Greek Letters</h3>
+<div class="button-row">
+  <button onclick="insertSymbol('alpha')">α</button>
+  <button onclick="insertSymbol('beta')">β</button>
+  <button onclick="insertSymbol('gamma')">γ</button>
+  <button onclick="insertSymbol('delta')">δ</button>
+  <button onclick="insertSymbol('epsilon')">ε</button>
+  <button onclick="insertSymbol('theta')">θ</button>
+  <button onclick="insertSymbol('pi')">π</button>
+  <button onclick="insertSymbol('omega')">ω</button>
+  <button onclick="insertSymbol('Delta')">Δ</button>
+  <button onclick="insertSymbol('Sigma')">Σ</button>
+  <button onclick="insertSymbol('Phi')">Φ</button>
+  <button onclick="insertSymbol('Psi')">Ψ</button>
+</div>
+</div>
+<!-- Logic & Set Theory -->
+     <div class="section">
+  <h3>Logic & Set Theory</h3>
+<div class="button-row">
+  <button onclick="insertSymbol('forall')">∀</button>
+  <button onclick="insertSymbol('exists')">∃</button>
+  <button onclick="insertSymbol('exists!')">∃!</button>
+  <button onclick="insertSymbol('nexists')">∄</button>
+  <button onclick="insertSymbol('in')">∈</button>
+  <button onclick="insertSymbol('notin')">∉</button>
+  <button onclick="insertSymbol('cup')">∪</button>
+  <button onclick="insertSymbol('cap')">∩</button>
+  <button onclick="insertSymbol('subset')">⊂</button>
+  <button onclick="insertSymbol('subseteq')">⊆</button>
+  <button onclick="insertSymbol('supset')">⊃</button>
+  <button onclick="insertSymbol('supseteq')">⊇</button>
+  <button onclick="insertSymbol('setminus')">∖</button>
+  <button onclick="insertSymbol('emptyset')">∅</button>
+  <button onclick="insertSymbol('neg')">¬</button>
+  <button onclick="insertSymbol('land')">∧</button>
+  <button onclick="insertSymbol('lor')">∨</button>
+</div>
+</div>
+<!-- Functions -->
+     <div class="section">
+  <h3>Functions</h3>
+<div class="button-row">
+  <button onclick="insertSymbol('log')">log</button>
+  <button onclick="insertSymbol('ln')">ln</button>
+  <button onclick="insertSymbol('log_{b}{x}')">log_b(x)</button>
+  <button onclick="insertSymbol('mod')">mod</button>
+  <button onclick="insertSymbol('gcd')">gcd</button>
+  <button onclick="insertSymbol('lcm')">lcm</button>
+</div>
+</div>
+<!-- Vectors, Dots, and Geometry -->
+     <div class="section">
+  <h3>Vectors & Geometry</h3>
+<div class="button-row">
+  <button onclick="insertSymbol('vec{v}')">→v</button>
+  <button onclick="insertSymbol('hat{i}')">î</button>
+  <button onclick="insertSymbol('dot{a} + dot{b}')">a· + b·</button>
+  <button onclick="insertSymbol('vec{a} cdot vec{b}')">a · b</button>
+  <button onclick="insertSymbol('vec{a} times vec{b}')">a × b</button>
+  <button onclick="insertSymbol('angle')">∠</button>
+  <button onclick="insertSymbol('triangle ABC')">△ABC</button>
+  <button onclick="insertSymbol('perp')">⊥</button>
+  <button onclick="insertSymbol('parallel')">∥</button>
+</div>
+</div>
+<!-- Matrices -->
+     <div class="section">
+  <h3>Matrices</h3>
+<div class="button-row">
+  <button onclick="insertSymbol('[[a,b],[c,d]]')">2×2 Matrix</button>
+  <button onclick="insertSymbol('pmatrix{a & b \\\\ c & d}')">⎡a b⎤</button>
+  <button onclick="insertSymbol('bmatrix{1 & 2 \\\\ 3 & 4}')">[Matrix]</button>
+  <button onclick="insertSymbol('det{[[a,b],[c,d]]}')">|Matrix|</button>
+</div>
+</div>
+<!-- Symbols and Constants -->
+     <div class="section">
+  <h3>Constants & Special Symbols</h3>
+<div class="button-row">
+  <button onclick="insertSymbol('infty')">∞</button>
+  <button onclick="insertSymbol('cdot')">·</button>
+  <button onclick="insertSymbol('circ')">∘</button>
+  <button onclick="insertSymbol('therefore')">∴</button>
+  <button onclick="insertSymbol('because')">∵</button>
+  <button onclick="insertSymbol('iff')">↔</button>
+  <button onclick="insertSymbol('implies')">⇒</button>
+</div>
+</div>
+<!-- Number Sets -->
+     <div class="section">
+  <h3>Number Sets</h3>
+<div class="button-row">
+  <button onclick="insertSymbol('mathbb{N}')">ℕ</button>
+  <button onclick="insertSymbol('mathbb{Z}')">ℤ</button>
+  <button onclick="insertSymbol('mathbb{Q}')">ℚ</button>
+  <button onclick="insertSymbol('mathbb{R}')">ℝ</button>
+  <button onclick="insertSymbol('mathbb{C}')">ℂ</button>
+</div>
+</div>
 
 
   </div>
+
+
 
   <div class="button-row">
     <button onclick="copyAlgebra()">Copy Algebra</button>
