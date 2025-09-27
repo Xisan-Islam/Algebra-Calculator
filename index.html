@@ -5,15 +5,19 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Algebra Calculator</title>
-   <!-- <script>
-    window.MathJax = {
-      tex: {
-        inlineMath: [['$', '$'], ['\\(', '\\)']],   // inline math
-        displayMath: [['$$', '$$'], ['\\[', '\\]']] // block math
-      },
-      startup: { typeset: false }
-    };
-  </script> -->
+  <script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],   // Inline
+      displayMath: [['$$', '$$'], ['\\[', '\\]']] // Block
+    },
+
+    startup: {
+      typeset: false // we will typeset manually
+    }
+  };
+</script>
+
   <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/startup.js"></script>
   <style>
     body {
@@ -476,22 +480,45 @@ button:active {
     const clearBtn = document.getElementById('clearBtn');
 
     function insertSymbol(symbol) {
-      const start = inputArea.selectionStart;
-      const end = inputArea.selectionEnd;
-      const text = inputArea.value;
-      inputArea.value = text.slice(0, start) + symbol + text.slice(end);
-      inputArea.focus();
-      inputArea.selectionStart = inputArea.selectionEnd = start + symbol.length;
-      liveRender();
-    }
-    function liveRender() {
+  const start = inputArea.selectionStart;
+  const end = inputArea.selectionEnd;
+  const text = inputArea.value;
+
+  let insertText = symbol;
+
+  // If symbol has {} placeholder, place cursor inside
+  const cursorPos = symbol.indexOf('{}');
+  if (cursorPos !== -1) {
+    insertText = symbol.replace('{}', '');
+    inputArea.value = text.slice(0, start) + insertText + text.slice(end);
+    inputArea.focus();
+    // place cursor where {} was
+    inputArea.selectionStart = inputArea.selectionEnd = start + cursorPos;
+  } else {
+    inputArea.value = text.slice(0, start) + insertText + text.slice(end);
+    inputArea.focus();
+    inputArea.selectionStart = inputArea.selectionEnd = start + insertText.length;
+  }
+
+  liveRender();
+}
+
+   function liveRender() {
   const expr = inputArea.value.trim();
-  output.innerHTML = expr ? `\\(${expr}\\)` : ''; // Inline LaTeX
+  if (!expr) {
+    output.innerHTML = '';
+    return;
+  }
+  // Wrap in inline math for MathJax
+  output.innerHTML = `\\(${expr}\\)`;
+
   if (window.MathJax) {
+    // Clear previous render and typeset again
     MathJax.typesetClear();
-    MathJax.typesetPromise([output]);
+    MathJax.typesetPromise([output]).catch((err) => console.log(err.message));
   }
 }
+
 
     inputArea.addEventListener('input', liveRender);
 
@@ -524,10 +551,8 @@ outputBox.addEventListener('wheel', (e) => {
   const latexExpr = inputArea.value.trim();
   if (!latexExpr) return;
 
-  // Wrap in WordPress shortcode or inline $...$ for MathJax plugin
-  const wpCompatible = `[latex]${latexExpr}[/latex]`; 
-  // OR, if using inline $...$, use:
-  // const wpCompatible = `$${latexExpr}$`;
+  // Wrap in WordPress shortcode for plugin
+  const wpCompatible = `[latex]${latexExpr}[/latex]`;
 
   navigator.clipboard.writeText(wpCompatible).then(() => {
     copyStatus.textContent = '✔ Copied in WordPress format!';
@@ -536,18 +561,10 @@ outputBox.addEventListener('wheel', (e) => {
 }
 
 
+
     function postToWordPress() {
       alert("This will send your expression to WordPress (demo).");
     }
   </script>
-  <script>
-  window.MathJax = {
-    tex: {
-      inlineMath: [['$', '$'], ['\\(', '\\)']],   // Inline
-      displayMath: [['$$', '$$'], ['\\[', '\\]']] // Block
-    },
-    startup: { typeset: false }
-  };
-</script>
 </body>
 </html>
