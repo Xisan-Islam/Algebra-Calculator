@@ -5,13 +5,15 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Algebra Calculator</title>
-  <script>
+   <!-- <script>
     window.MathJax = {
-      loader: {load: ['input/asciimath', 'output/chtml']},
-      asciimath: {delimiters: [['`','`']]},
-      startup: {typeset: false}
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],   // inline math
+        displayMath: [['$$', '$$'], ['\\[', '\\]']] // block math
+      },
+      startup: { typeset: false }
     };
-  </script>
+  </script> -->
   <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/startup.js"></script>
   <style>
     body {
@@ -483,13 +485,14 @@ button:active {
       liveRender();
     }
     function liveRender() {
-      const expr = inputArea.value.trim();
-      output.textContent = expr ? '`' + expr + '`' : '';
-      if (window.MathJax) {
-        MathJax.typesetClear();
-        MathJax.typesetPromise([output]);
-      }
-    }
+  const expr = inputArea.value.trim();
+  output.innerHTML = expr ? `\\(${expr}\\)` : ''; // Inline LaTeX
+  if (window.MathJax) {
+    MathJax.typesetClear();
+    MathJax.typesetPromise([output]);
+  }
+}
+
     inputArea.addEventListener('input', liveRender);
 
     clearBtn.addEventListener('click', () => {
@@ -528,5 +531,14 @@ outputBox.addEventListener('wheel', (e) => {
       alert("This will send your expression to WordPress (demo).");
     }
   </script>
+  <script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],   // Inline
+      displayMath: [['$$', '$$'], ['\\[', '\\]']] // Block
+    },
+    startup: { typeset: false }
+  };
+</script>
 </body>
 </html>
