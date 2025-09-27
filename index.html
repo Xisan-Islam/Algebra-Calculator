@@ -1,23 +1,18 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta charset="UTF-8" />
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Algebra Calculator</title>
   <script>
-  window.MathJax = {
-    tex: {
-      inlineMath: [['$', '$'], ['\\(', '\\)']],   // Inline
-      displayMath: [['$$', '$$'], ['\\[', '\\]']] // Block
-    },
-
-    startup: {
-      typeset: false // we will typeset manually
-    }
-  };
-</script>
-
+    window.MathJax = {
+      loader: {load: ['input/asciimath', 'output/chtml']},
+      asciimath: {delimiters: [['`', '`']]},
+      asciimath: {delimiters: [['`','`']]},
+      startup: {typeset: false}
+    };
+  </script>
   <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/startup.js"></script>
   <style>
     body {
@@ -25,6 +20,7 @@
       background: #121212;
       color: #fff;
       margin: 0;
+      padding: 2rem;
       height: 100vh;
       display: flex;
       flex-direction: column;
@@ -33,6 +29,11 @@
       padding: 0.5rem;
       box-sizing: border-box;
       overflow: hidden; /* no body scroll */
+    }
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      color: #66d9ef;
     }
     h1 { font-size: 1.6rem; margin: 0.3rem 0; color: #66d9ef; }
     textarea {
@@ -44,6 +45,8 @@
     .keyboard {
       flex: 1;
       width: 100%;
+      max-width: 50vw;
+      height: 120px;
       max-width: 1025px;
       display: flex;
       gap: 0.4rem;
@@ -76,7 +79,12 @@
       flex: 1;
       min-width: 200px;
       background: #1e1e1e;
+      color: #fff;
+      border: 2px solid #66d9ef;
+      padding: 1rem;
+      font-size: 1.5rem;
       border-radius: 10px;
+      margin-bottom: 1rem;
       display: flex;
       flex-direction: column;
     }
@@ -94,24 +102,49 @@
       overflow-y: auto;
       padding: 0.3rem;
     }
+    .button-row, .keyboard {
     .button-row {
       display: flex;
       flex-wrap: wrap;
+      gap: 1rem;
       gap: 0.3rem;
       justify-content: center;
+      margin-bottom: 2rem;
     }
+    button {
+      background: #000000;
     /* button {
       background: #000; border: none;
       padding: 0.35rem 0.6rem;
       color: #fff; font-size: 0.85rem;
       border-radius: 6px; cursor: pointer;
       border: none;
+      padding: 0.75rem 1.2rem;
+      color: #ffffff;
       font-weight: 600;
+      font-size: 1.75rem;
+      border-radius: 8px;
+      cursor: pointer;
       transition: transform 0.2s ease, box-shadow 0.3s ease;
     }
     
     button:hover {
       transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(102, 217, 239, 0.3);
+    }
+
+   #output {
+  background: #1e1e1e;
+  padding: 1.5rem;
+  border-radius: 10px;
+  border: 1px solid #66d9ef;
+  height: 10vh;               /* fixed height to test scroll */
+  width: 90vw;                /* responsive width */
+  font-size: 1.5rem;
+  overflow-y: auto;           /* vertical scroll */
+  word-wrap: break-word;
+  white-space: normal;
+  display: block;             /* ensure it's not flex */
       box-shadow: 0 6px 12px rgba(148, 237, 255, 0.3);
     } */
 
@@ -131,12 +164,28 @@ button {
   /* box-shadow: 0 4px 6px rgba(102, 217, 239, 0.2); */
 }
 
+    #copy-status {
+      margin-top: 10px;
+      font-size: 0.9rem;
+      color: #a6e22e;
+    }
+    #xisan {
+      position: fixed;
+      bottom: 10px;
+      right: 10px;
+      font-size: 1rem;
+      color: #f92672;
+      opacity: 0.7;
+    }
 /* Hover effect */
 button:hover {
   transform: translateY(-2px) scale(1.05);
   box-shadow: 0 6px 12px rgba(102, 217, 239, 0.4);
 }
 
+    .button-row{
+      display: flex;
+      flex-direction: row;
 /* Active / Click effect */
 button:active {
   transform: scale(0.95);
@@ -144,7 +193,24 @@ button:active {
   background: #111; /* slightly darker on click */
 }
 
+    }
+    .section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-right: 2rem;
+      padding-left: 2rem;
+      border-radius: 20px;
+      background-color: #1e1e1e;
+      margin-top: 0px;
+      margin-bottom: 0px;
+    }
 
+    .section h3 {
+      color: #66d9ef;
+      margin-bottom: 0.5rem;
+      font-size: 1.5rem;
+    }
 
     
     #output {
@@ -171,10 +237,31 @@ button:active {
 </head>
 <body>
   <h1>Algebra Calculator</h1>
+  <textarea id="inputArea" placeholder="Type your algebra expression using AsciiMath (e.g., frac{5}{3} + sqrt{16})..."></textarea>
   <textarea id="inputArea" placeholder="Type your algebra expression using AsciiMath..."></textarea>
 
   <!-- 🔹 All the symbol sections you pasted -->
   <div class="keyboard" role="region" aria-live="polite" aria-label="Math symbols keyboard">
+    <!-- Basic Math Operators -->
+     <div class="section">
+  <h3>Basic Operators</h3>
+<div class="button-row">
+  <button onclick="insertSymbol('+')">+</button>
+  <button onclick="insertSymbol('-')">−</button>
+  <button onclick="insertSymbol('*')">×</button>
+  <button onclick="insertSymbol('÷')">÷</button>
+  <button onclick="insertSymbol('/')">/</button>
+  <button onclick="insertSymbol('=')">=</button>
+  <button onclick="insertSymbol('!=')">≠</button>
+  <button onclick="insertSymbol('>')">></button>
+  <button onclick="insertSymbol('<')"><</button>
+  <button onclick="insertSymbol('>=')">≥</button>
+  <button onclick="insertSymbol('<=')">≤</button>
+  <button onclick="insertSymbol('approx')">≈</button>
+  <button onclick="insertSymbol('+-')">±</button>
+</div>
+</div>
+
     <!-- Basic Operators -->
     <!-- paste your full <div class="section"> ... </div> blocks here -->
     <!-- I kept your original structure, no change -->
@@ -460,7 +547,9 @@ button:active {
   <button onclick="insertSymbol('ldots')">…</button>
   </div>
   </div>
+
   </div>
+
 
   </div>
 
@@ -480,45 +569,27 @@ button:active {
     const clearBtn = document.getElementById('clearBtn');
 
     function insertSymbol(symbol) {
-  const start = inputArea.selectionStart;
-  const end = inputArea.selectionEnd;
-  const text = inputArea.value;
+      const start = inputArea.selectionStart;
+      const end = inputArea.selectionEnd;
+      const text = inputArea.value;
+      inputArea.value = text.slice(0, start) + symbol + text.slice(end);
+      inputArea.focus();
+      inputArea.selectionStart = inputArea.selectionEnd = start + symbol.length;
+      liveRender();
+    }
 
-  let insertText = symbol;
-
-  // If symbol has {} placeholder, place cursor inside
-  const cursorPos = symbol.indexOf('{}');
-  if (cursorPos !== -1) {
-    insertText = symbol.replace('{}', '');
-    inputArea.value = text.slice(0, start) + insertText + text.slice(end);
-    inputArea.focus();
-    // place cursor where {} was
-    inputArea.selectionStart = inputArea.selectionEnd = start + cursorPos;
-  } else {
-    inputArea.value = text.slice(0, start) + insertText + text.slice(end);
-    inputArea.focus();
-    inputArea.selectionStart = inputArea.selectionEnd = start + insertText.length;
-  }
-
-  liveRender();
-}
-
-   function liveRender() {
-  const expr = inputArea.value.trim();
-  if (!expr) {
-    output.innerHTML = '';
-    return;
-  }
-  // Wrap in inline math for MathJax
-  output.innerHTML = `\\(${expr}\\)`;
-
-  if (window.MathJax) {
-    // Clear previous render and typeset again
-    MathJax.typesetClear();
-    MathJax.typesetPromise([output]).catch((err) => console.log(err.message));
-  }
-}
-
+    function liveRender() {
+      const expr = inputArea.value.trim();
+      output.textContent = expr ? '`' + expr + '`' : '';
+      if (window.MathJax) {
+        MathJax.typesetClear();
+        MathJax.typesetPromise([output]).catch(err => {
+          output.innerHTML = '<span style="color:#ff6666;">Error rendering math</span>';
+          console.error(err);
+        });
+        MathJax.typesetPromise([output]);
+      }
+    }
 
     inputArea.addEventListener('input', liveRender);
 
@@ -526,6 +597,7 @@ button:active {
       inputArea.value = '';
       output.textContent = '';
       copyStatus.textContent = '';
+      inputArea.focus();
     });
 
     // Horizontal scroll with mouse wheel
@@ -547,24 +619,49 @@ outputBox.addEventListener('wheel', (e) => {
 }, { passive: false });
 
 
-   function copyAlgebra() {
-  const latexExpr = inputArea.value.trim();
-  if (!latexExpr) return;
-
-  // Wrap in WordPress shortcode for plugin
-  const wpCompatible = `[latex]${latexExpr}[/latex]`;
-
-  navigator.clipboard.writeText(wpCompatible).then(() => {
-    copyStatus.textContent = '✔ Copied in WordPress format!';
-    setTimeout(() => copyStatus.textContent = '', 1500);
-  });
-}
-
-
+    function copyAlgebra() {
+      const text = inputArea.value.trim();
+      navigator.clipboard.writeText(text).then(() => {
+        copyStatus.textContent = '✔ Copied to clipboard!';
+        setTimeout(() => copyStatus.textContent = '', 2000);
+      navigator.clipboard.writeText(inputArea.value.trim()).then(() => {
+        copyStatus.textContent = '✔ Copied!';
+        setTimeout(() => copyStatus.textContent = '', 1500);
+      });
+    }
 
     function postToWordPress() {
+      const algebra = inputArea.value.trim();
+      if (!algebra) return alert("Enter an algebra expression first!");
+
+      const wpUsername = 'YOUR_USERNAME';
+      const wpAppPassword = 'YOUR_APP_PASSWORD';
+      const auth = btoa(`${wpUsername}:${wpAppPassword}`);
+
+      fetch('https://yourwordpresssite.com/wp-json/wp/v2/posts', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Basic ' + auth
+        },
+        body: JSON.stringify({
+          title: 'New Algebra Post',
+          content: '`' + algebra + '`',
+          status: 'publish'
+        })
+      })
+      .then(res => res.json())
+      .then(data => {
+        alert('Post published! ID: ' + data.id);
+      })
+      .catch(err => {
+        console.error(err);
+        alert('Failed to post to WordPress.');
+      });
       alert("This will send your expression to WordPress (demo).");
     }
   </script>
 </body>
 </html>
+
+#©sahels.online
