@@ -520,12 +520,21 @@ outputBox.addEventListener('wheel', (e) => {
 }, { passive: false });
 
 
-    function copyAlgebra() {
-      navigator.clipboard.writeText(inputArea.value.trim()).then(() => {
-        copyStatus.textContent = '✔ Copied!';
-        setTimeout(() => copyStatus.textContent = '', 1500);
-      });
-    }
+   function copyAlgebra() {
+  const latexExpr = inputArea.value.trim();
+  if (!latexExpr) return;
+
+  // Wrap in WordPress shortcode or inline $...$ for MathJax plugin
+  const wpCompatible = `[latex]${latexExpr}[/latex]`; 
+  // OR, if using inline $...$, use:
+  // const wpCompatible = `$${latexExpr}$`;
+
+  navigator.clipboard.writeText(wpCompatible).then(() => {
+    copyStatus.textContent = '✔ Copied in WordPress format!';
+    setTimeout(() => copyStatus.textContent = '', 1500);
+  });
+}
+
 
     function postToWordPress() {
       alert("This will send your expression to WordPress (demo).");
