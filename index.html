@@ -551,6 +551,31 @@ outputBox.addEventListener('wheel', (e) => {
   }
 }, { passive: false });
 
+  // smooth vertical scrolling with mouse wheel
+
+const sections = document.querySelectorAll('.section-content');
+
+sections.forEach(section => {
+  section.addEventListener('wheel', (e) => {
+    const atTop = section.scrollTop === 0;
+    const atBottom = section.scrollTop + section.clientHeight >= section.scrollHeight;
+
+    if ((e.deltaY < 0 && atTop) || (e.deltaY > 0 && atBottom)) {
+      // Allow page or other containers to scroll
+      return;
+    }
+
+    // Only this section scrolls
+    e.preventDefault();
+    e.stopPropagation();   // 🔑 stop from affecting other sections
+    section.scrollTop += e.deltaY;
+  }, { passive: false });
+});
+
+
+
+
+
 
     function copyAlgebra() {
       navigator.clipboard.writeText(inputArea.value.trim()).then(() => {
