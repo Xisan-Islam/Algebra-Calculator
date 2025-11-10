@@ -389,22 +389,23 @@ button:active {
 <button onclick="insertSymbol('\\Rightarrow')">⇒</button>
 <button onclick="insertSymbol('\\Leftarrow')">⇐</button>
 <button onclick="insertSymbol('\\Leftrightarrow')">⇔</button>
-<button onclick="insertSymbol('\\rightleftharpoons')">⇌</button>
-<button onclick="insertSymbol('\\xrightarrow{heat}')">→ (heat)</button>
-<button onclick="insertSymbol('\\xrightarrow{light}')">→ (light)</button>
+<button onclick="insertSymbol('⇌')">⇌</button>
+<button onclick="insertSymbol('\\xrightarrow(heat)')">→ (heat)</button>
+<button onclick="insertSymbol('\\xrightarrow(light)')">→ (light)</button>
 
 
 <!-- Bonds -->
 <button onclick="insertSymbol('-')">Single Bond</button>
 <button onclick="insertSymbol('=')">Double Bond</button>
 <button onclick="insertSymbol('\\equiv')">Triple Bond ≡</button>
+<button onclick="insertSymbol('\\dots')">··· (H-bond)</button>
 
 
 <!-- Misc useful for chemistry -->
 <button onclick="insertSymbol('\\uparrow')">↑</button>
 <button onclick="insertSymbol('\\downarrow')">↓</button>
-<button onclick="insertSymbol('\\rightleftarrows')">⇄</button>
-<button onclick="insertSymbol('\\leftrightharpoons')">⇋</button>
+<button onclick="insertSymbol('⇄')">⇄</button>
+<button onclick="insertSymbol('⇋')">⇋</button>
 
 
 </div>
@@ -433,6 +434,58 @@ button:active {
 <button onclick="insertSymbol('(l)')">(l)</button>
 <button onclick="insertSymbol('(g)')">(g)</button>
 <button onclick="insertSymbol('(aq)')">(aq)</button>
+
+</div>
+</div>
+</div>
+<!-- Symbols and Constants -->
+     <div class="section">
+  <h3>Chemistry Charges & Ions</h3>
+  <div class="section-content">
+<div class="button-row">
+<!-- Charges and Ions -->
+<button onclick="insertSymbol('H^+')">⁺</button>
+<button onclick="insertSymbol('H^-')">⁻</button>
+<button onclick="insertSymbol('H^{2+}')">²⁺</button>
+<button onclick="insertSymbol('H^{2-}')">²⁻</button>
+<button onclick="insertSymbol('H^{3+}')">³⁺</button>
+<button onclick="insertSymbol('H^{3-}')">³⁻</button>
+
+<!-- Common chemistry text -->
+<button onclick="insertSymbol('\\text{pH}')">pH</button>
+<button onclick="insertSymbol('\\text{mol}')">mol</button>
+<button onclick="insertSymbol('\\text{atm}')">atm</button>
+<button onclick="insertSymbol('\\text{kJ}')">kJ</button>
+<button onclick="insertSymbol('\\text{cal}')">cal</button>
+
+
+<!-- Subscripts for chemical formulas -->
+<button onclick="insertSymbol('H_{n}')">H<sub>n</sub></button>
+<button onclick="insertSymbol('H_{2}')">H₂</button>
+<button onclick="insertSymbol('H_{3}')">H₃</button>
+<button onclick="insertSymbol('H_{4}')">H₄</button>
+<button onclick="insertSymbol('H_{5}')">H₅</button>
+<button onclick="insertSymbol('H_{6}')">H₆</button>
+
+<!-- Superscripts for isotopes -->
+
+<button onclick="insertSymbol('H^{n}')">H<sup>n</sup></button>
+<button onclick="insertSymbol('H^{1}')">H¹</button>
+<button onclick="insertSymbol('H^{2}')">H²</button>
+<button onclick="insertSymbol('H^{3}')">H³</button>
+<button onclick="insertSymbol('H^{4}')">H⁴</button>
+<button onclick="insertSymbol('H^{14}')">H¹⁴</button>
+
+<!-- Example elements -->
+<button onclick="insertSymbol('H')">H</button>
+<button onclick="insertSymbol('O')">O</button>
+<button onclick="insertSymbol('Na')">Na</button>
+<button onclick="insertSymbol('Cl')">Cl</button>
+<button onclick="insertSymbol('Cu')">Cu</button>
+<button onclick="insertSymbol('Fe')">Fe</button>
+<button onclick="insertSymbol('Ca')">Ca</button>
+<button onclick="insertSymbol('Mg')">Mg</button>
+
 
 </div>
 </div>
@@ -552,7 +605,7 @@ button:active {
   </div>
   <div id="output"></div>
   <div id="copy-status"></div>
-  <div id="xisan">#madebyxisanislam</div>
+  <div id="xisan">#developedbyxisanislam</div>
 
   <script>
     const inputArea = document.getElementById('inputArea');
